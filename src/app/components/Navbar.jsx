@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Image from "next/image";
 import tezmindsLogo from '../../assets/tezmindslogo.png';
 import profile1 from '../../assets/profile1.png';
@@ -6,6 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Avatar from '@mui/material/Avatar';
+import { profileImgUrl } from '../../constants';
 
 const Navbar = () => {
     return (
@@ -16,7 +17,7 @@ const Navbar = () => {
             </div>
             <div style={{display:'flex', alignItems:"center", gap:"1rem"}}>
                 <NotificationsIcon/>
-                <Avatar alt="Profile pic" src={profile1.src} />
+                <Avatar alt="Profile pic" src={profileImgUrl} />
                 <SettingsIcon />
             </div>
         </div>
