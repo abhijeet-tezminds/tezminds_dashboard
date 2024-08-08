@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 import { Button, Chip, Stack, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ViewDayOutlinedIcon from "@mui/icons-material/ViewDayOutlined";
@@ -9,8 +9,9 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FilterListOutlinedIcon from "@mui/icons-material/FilterListOutlined";
 import TableList from "../components/TableList";
 import { profileImgUrl } from "../../constants";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AddTaskModal from '../components/AddTaskModal';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddTaskModal from "../components/AddTaskModal";
+import SearchTasksModal from "../components/SearchTasksModal";
 
 function createData(id, taskName, status, tags, members, dueDates) {
   return {
@@ -64,12 +65,6 @@ const rows = [
 ];
 
 const page = () => {
-  // const [value, setValue] = React.useState(0);
-
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
-
   return (
     <div className="w-full py-4">
       <Typography className="text-3xl">Tasks</Typography>
@@ -93,7 +88,7 @@ const page = () => {
             label="Danny Workspace"
             size="small"
             deleteIcon={<ExpandMoreIcon />}
-            onDelete={()=>{}}
+            onDelete={() => {}}
             // icon={<DoneIcon />}
           />
           <Button
@@ -121,17 +116,7 @@ const page = () => {
           </Button>
         </Stack>
         <Stack direction="row" spacing={2} alignItems="center" gap={2}>
-          <Button
-            variant="text"
-            size="small"
-            startIcon={<SearchOutlinedIcon />}
-            color="inherit"
-            style={{
-              textTransform: "none",
-            }}
-          >
-            Search
-          </Button>
+          <SearchTasksModal />
           <Button
             variant="text"
             size="small"

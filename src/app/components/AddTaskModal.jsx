@@ -11,7 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import DateRangeIcon from "@mui/icons-material/DateRange";
-import AttachmentIcon from '@mui/icons-material/Attachment';
+import AttachmentIcon from "@mui/icons-material/Attachment";
 
 const style = {
   position: "absolute",
@@ -21,7 +21,7 @@ const style = {
   width: 700,
   bgcolor: "background.paper",
   boxShadow: 24,
-  p: 4,
+  p: 2,
   borderRadius: "1rem",
 };
 
@@ -29,6 +29,7 @@ const AddTaskModal = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   return (
     <div>
       <Button
@@ -45,7 +46,7 @@ const AddTaskModal = () => {
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <Stack direction={"column"}>
+          <Stack direction={"column"} gap={1}>
             <Stack
               direction={"row"}
               justifyContent={"space-between"}
@@ -64,7 +65,7 @@ const AddTaskModal = () => {
               />
             </div>
             <InputBase
-              sx={{ ml: 1, flex: 1 }}
+              sx={{ ml: 1, flex: 1, mt: 1, fontSize: 24 }}
               placeholder="Write a task name"
             />
             <Stack
@@ -74,10 +75,11 @@ const AddTaskModal = () => {
                 background: "#F0F1F2",
                 borderRadius: "16px",
                 padding: "1rem",
+                margin: "0.5rem 0",
               }}
             >
               <Stack direction={"column"}>
-                <Typography>Status</Typography>
+                <Typography style={{ fontSize: "12px" }}>Status</Typography>
                 <Chip
                   label="Todo"
                   size="small"
@@ -88,7 +90,7 @@ const AddTaskModal = () => {
                 />
               </Stack>
               <Stack>
-                <Typography>Members</Typography>
+                <Typography style={{ fontSize: "12px" }}>Members</Typography>
                 <PermIdentityIcon
                   style={{
                     border: "1px dotted #C1C1C1",
@@ -99,7 +101,7 @@ const AddTaskModal = () => {
                 />
               </Stack>
               <Stack>
-                <Typography>Tags</Typography>
+                <Typography style={{ fontSize: "12px" }}>Tags</Typography>
                 <AddIcon
                   style={{
                     border: "1px dotted #C1C1C1",
@@ -110,7 +112,7 @@ const AddTaskModal = () => {
                 />
               </Stack>
               <Stack>
-                <Typography>Due Date</Typography>
+                <Typography style={{ fontSize: "12px" }}>Due Date</Typography>
                 <DateRangeIcon
                   style={{
                     border: "1px dotted #C1C1C1",
@@ -127,9 +129,23 @@ const AddTaskModal = () => {
               cols={30}
               style={{ border: "1px solid #F0F1F2", borderRadius: "4px" }}
             />
-            <Stack direction={"row"} justifyContent={'end'}>
-              <AttachmentIcon />
-              <Button variant="contained" color="primary">
+            <Stack
+              direction={"row"}
+              justifyContent={"end"}
+              alignItems={"center"}
+              gap={2}
+              className="mt-4 pt-4"
+              style={{
+                borderTop: "1px solid #F0F1F2",
+              }}
+            >
+              <AttachmentIcon style={{ cursor: "pointer" }} />
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                style={{ textTransform: "none" }}
+              >
                 Create Task
               </Button>
             </Stack>
