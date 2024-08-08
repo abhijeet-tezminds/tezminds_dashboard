@@ -103,13 +103,17 @@ const SearchTasksModal = () => {
     setSearchQuery(searchQuery);
   };
 
+  const getTasks = () => {
+    setTasks(
+      constanttasks.filter((t) =>
+        t.title.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
+      )
+    );
+  }
+
   React.useEffect(() => {
     const getData = setTimeout(() => {
-      setTasks(
-        constanttasks.filter((t) =>
-          t.title.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
-        )
-      );
+      getTasks();
     }, 500);
     return () => clearTimeout(getData);
   }, [searchQuery]);
@@ -206,7 +210,7 @@ const SearchTasksModal = () => {
                         alignItems="center"
                         direction={"row"}
                         gap={2}
-                        className="p-2 rounded hover:bg-[#F0F1F2] cursor-pointer w-full"
+                        className="p-2 rounded-lg hover:bg-[#F0F1F2] cursor-pointer w-full"
                       >
                         {item.icon || <TaskAltIcon />}
                         <Stack>

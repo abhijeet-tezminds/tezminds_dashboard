@@ -10,7 +10,7 @@ import FilterListOutlinedIcon from "@mui/icons-material/FilterListOutlined";
 import TableList from "../components/TableList";
 import { profileImgUrl } from "../../constants";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import AddTaskModal from "../components/AddTaskModal";
+import AddTaskModal from "../components/addTaskPopup/AddTaskModal";
 import SearchTasksModal from "../components/SearchTasksModal";
 
 function createData(id, taskName, status, tags, members, dueDates) {

@@ -12,6 +12,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import AttachmentIcon from "@mui/icons-material/Attachment";
+import StatusPopup from "./StatusPopup";
+import WorkSpacePop from "./WorkSpacePopup";
+import MembersPopup from "./MembersPopup";
+import TagsPopup from "./TagsPopup";
 
 const style = {
   position: "absolute",
@@ -55,14 +59,8 @@ const AddTaskModal = () => {
               <Typography variant="h6">Add Task</Typography>
               <CloseIcon onClick={handleClose} sx={{ cursor: "pointer" }} />
             </Stack>
-            <div>
-              <Chip
-                label="Danny Workspace"
-                size="small"
-                deleteIcon={<ExpandMoreIcon />}
-                onDelete={() => {}}
-                // icon={<DoneIcon />}
-              />
+            <div style={{ margin: "auto", marginLeft: "0" }}>
+              <WorkSpacePop />
             </div>
             <InputBase
               sx={{ ml: 1, flex: 1, mt: 1, fontSize: 24 }}
@@ -78,39 +76,9 @@ const AddTaskModal = () => {
                 margin: "0.5rem 0",
               }}
             >
-              <Stack direction={"column"}>
-                <Typography style={{ fontSize: "12px" }}>Status</Typography>
-                <Chip
-                  label="Todo"
-                  size="small"
-                  deleteIcon={<ExpandMoreIcon />}
-                  onDelete={() => {}}
-                  style={{ background: "white" }}
-                  // icon={<DoneIcon />}
-                />
-              </Stack>
-              <Stack>
-                <Typography style={{ fontSize: "12px" }}>Members</Typography>
-                <PermIdentityIcon
-                  style={{
-                    border: "1px dotted #C1C1C1",
-                    borderRadius: "50%",
-                    width: "24px",
-                    height: "24px",
-                  }}
-                />
-              </Stack>
-              <Stack>
-                <Typography style={{ fontSize: "12px" }}>Tags</Typography>
-                <AddIcon
-                  style={{
-                    border: "1px dotted #C1C1C1",
-                    borderRadius: "50%",
-                    width: "24px",
-                    height: "24px",
-                  }}
-                />
-              </Stack>
+              <StatusPopup />
+              <MembersPopup />
+              <TagsPopup />
               <Stack>
                 <Typography style={{ fontSize: "12px" }}>Due Date</Typography>
                 <DateRangeIcon
@@ -125,7 +93,7 @@ const AddTaskModal = () => {
             </Stack>
             <Typography>Description</Typography>
             <textarea
-              rows={5}
+              rows={10}
               cols={30}
               style={{ border: "1px solid #F0F1F2", borderRadius: "4px" }}
             />

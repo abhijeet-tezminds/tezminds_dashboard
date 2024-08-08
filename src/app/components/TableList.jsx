@@ -13,7 +13,7 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { visuallyHidden } from "@mui/utils";
 import { Avatar, Chip } from "@mui/material";
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -240,9 +240,10 @@ export default function TableList({ rows }) {
                   <TableCell>{row.status || "-"}</TableCell>
                   <TableCell>
                     {Array.isArray(row.tags) &&
-                      row.tags?.map((tag) => (
+                      row.tags?.map((tag, i) => (
                         <Chip
                           label={tag.tagName}
+                          key={i}
                           size="small"
                           style={{
                             background: tag.color,
@@ -256,21 +257,26 @@ export default function TableList({ rows }) {
                     <Avatar src={row.members} sx={{ width: 24, height: 24 }} />
                   </TableCell>
                   <TableCell>
-                    {/* <AccessTimeIcon style={{fontSize:"1rem"}}/> */}
-                      {/* {row.dueDates || "-"} */}
-                      {
-                        row.dueDates ? 
+                    {row.dueDates ? (
                       <Chip
-                          label={row.dueDates}
-                          icon={<AccessTimeIcon color="white" style={{fontSize:"1rem"}} />}
-                          size="small"
-                          style={{
-                            background: row.status==='Done' ? "#3CD987" : "#E9414B",
-                            color: "#fff",
-                            marginRight: "0.25rem",
-                          }}
-                        />: "-"
-                      }
+                        label={row.dueDates}
+                        icon={
+                          <AccessTimeIcon
+                            color="white"
+                            style={{ fontSize: "1rem" }}
+                          />
+                        }
+                        size="small"
+                        style={{
+                          background:
+                            row.status === "Done" ? "#3CD987" : "#E9414B",
+                          color: "#fff",
+                          marginRight: "0.25rem",
+                        }}
+                      />
+                    ) : (
+                      "-"
+                    )}
                   </TableCell>
                 </TableRow>
               );
