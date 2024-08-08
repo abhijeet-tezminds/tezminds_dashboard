@@ -20,7 +20,7 @@ import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import Image from "next/image";
 import notFoundTasks from "../../assets/notfoundtasks.png";
 
-const tasks = [
+const constanttasks = [
   {
     id: 1,
     title: "Meeting with John",
@@ -32,8 +32,17 @@ const tasks = [
   },
   {
     id: 2,
-    title: "Meeting with John",
+    title: "Design digital business card page",
     status: "Todo",
+    workSpace: "Danny Workspace",
+    icon: <TaskAltIcon />,
+    createdAt: new Date("2022-01-15T14:00:00"),
+    updatedAt: new Date("2022-01-15T14:00:00"),
+  },
+  {
+    id: 3,
+    title: "Task name here",
+    status: "In-Progress",
     workSpace: "Danny Workspace",
     icon: <TaskAltIcon />,
     createdAt: new Date("2022-01-15T14:00:00"),
@@ -79,6 +88,8 @@ function CustomTabPanel(props) {
 const SearchTasksModal = () => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(1);
+  const [tasks, setTasks] = React.useState([]);
+  const [searchQuery, setSearchQuery] = React.useState("");
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -86,6 +97,22 @@ const SearchTasksModal = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleSearch = (e) => {
+    const searchQuery = e.target.value;
+    setSearchQuery(searchQuery);
+  };
+
+  React.useEffect(() => {
+    const getData = setTimeout(() => {
+      setTasks(
+        constanttasks.filter((t) =>
+          t.title.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
+        )
+      );
+    }, 500);
+    return () => clearTimeout(getData);
+  }, [searchQuery]);
 
   return (
     <div>
@@ -112,7 +139,11 @@ const SearchTasksModal = () => {
               <IconButton>
                 <SearchIcon />
               </IconButton>
-              <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search..." />
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search..."
+                onChange={handleSearch}
+              />
               <CloseIcon onClick={handleClose} sx={{ cursor: "pointer" }} />
             </Stack>
             <Box sx={{ width: "100%" }}>
@@ -152,12 +183,19 @@ const SearchTasksModal = () => {
                   }}
                 >
                   {tasks.length === 0 ? (
-                    <Stack justifyContent={'center'} alignItems={'center'}>
-                       <Image src={notFoundTasks} alt="Tez Minds Logo" className="py-4"/>
+                    <Stack justifyContent={"center"} alignItems={"center"}>
+                      <Image
+                        src={notFoundTasks}
+                        alt="Tez Minds Logo"
+                        className="py-4"
+                      />
                       <Typography variant="subtitle2">
                         No results found
                       </Typography>
-                      <Typography variant="caption" style={{color:"#C1C1C1"}}>
+                      <Typography
+                        variant="caption"
+                        style={{ color: "#C1C1C1" }}
+                      >
                         Try using different keywords
                       </Typography>
                     </Stack>
@@ -172,13 +210,13 @@ const SearchTasksModal = () => {
                       >
                         {item.icon || <TaskAltIcon />}
                         <Stack>
-                          <Typography>{"tezminds_logo.png"}</Typography>
+                          <Typography>{item.title}</Typography>
                           <Stack direction={"row"} gap={2}>
                             <Typography variant="caption">
                               {item.status}
                             </Typography>
                             <Typography variant="caption">
-                              {item.workSpace}
+                              {item.workSpace || ""}
                             </Typography>
                             <Typography variant="caption">
                               {item.updatedAt
